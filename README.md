@@ -3,7 +3,7 @@
 
 MemeGen is a ASP .NET Core Project. The purpose of this Webapplication is the generation of custom Memes. You can use your own pictures as Template or you can re-use one of the predefined Meme-Templates.  
 
-The Users is able to create and save his collection of Meme within his profile.
+The Users is able to create and save his collection of Memes within his profile.
 
 ## Getting Started
 
@@ -28,7 +28,6 @@ Give examples
 - Visual Studio 2017
 - .NET CORE 2.2
 - Microsoft SQL Server 2017
-- Balsamiq 3
 
 ## Authors
 
