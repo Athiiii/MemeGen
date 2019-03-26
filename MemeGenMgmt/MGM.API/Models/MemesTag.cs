@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MGM.CQRS.Models
+namespace MGM.API.Models
 {
-    internal partial class MemesTag
+    public partial class MemesTag
     {
         public int MemesId { get; set; }
         public int TagId { get; set; }

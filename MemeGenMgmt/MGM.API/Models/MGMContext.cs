@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace MGM.CQRS.Models
+namespace MGM.API.Models
 {
-    internal partial class MGMContext : DbContext
+    public partial class MGMContext : DbContext
     {
         public MGMContext()
         {

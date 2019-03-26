@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MGM.CQRS.Models
+namespace MGM.API.Models
 {
-    internal partial class UsersSet
+    public partial class UsersSet
     {
         public UsersSet()
         {
