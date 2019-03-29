@@ -5,30 +5,30 @@ using System.Text;
 
 namespace MGM.CQRS.Store
 {
-    internal class TemplateStore
-        : IDbMGMStoreCRUD<TemplateSet>
+    internal class UserStore
+        : IDbMGMStoreCRUD<UsersSet>
     {
-        public bool Delete(TemplateSet model, int id = -1)
+        public bool Delete(UsersSet model, int id = -1)
         {
             throw new NotImplementedException();
         }
 
-        public bool Insert(TemplateSet model)
+        public bool Insert(UsersSet model)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<TemplateSet> Select()
+        public IEnumerable<UsersSet> Select()
         {
             throw new NotImplementedException();
         }
 
-        public TemplateSet SelectById(int id)
+        public UsersSet SelectById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(TemplateSet model, int id = -1)
+        public bool Update(UsersSet model, int id = -1)
         {
             throw new NotImplementedException();
         }
