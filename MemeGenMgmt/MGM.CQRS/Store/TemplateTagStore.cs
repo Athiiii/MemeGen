@@ -1,36 +1,62 @@
-﻿using MGM.API.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MGM.API.Models;
 
 namespace MGM.CQRS.Store
 {
     internal class TemplateTagStore
-        : IDbMGMStoreCRUD<TemplateTag>
+        : IdbMgmStoreTagCRUD<TemplateTag>
     {
         public bool Delete(TemplateTag model, int id = -1)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                var templateTag =
+                    context.TemplateTag.FirstOrDefault(x => x.TemplateId == model.TemplateId && x.TagId == model.TagId);
+                if (templateTag == null) return false;
+                {
+                    context.TemplateTag.Remove(templateTag);
+                    context.SaveChanges();
+                    return context.TemplateTag.FirstOrDefault(x => x.TemplateId == model.TemplateId && x.TagId == model.TagId) == null;
+                }
+            }
         }
 
-        public bool Insert(TemplateTag model)
+        public void Insert(TemplateTag model)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                context.TemplateTag.Add(model);
+                context.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<TemplateTag> Select()
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+                return context.TemplateTag;
         }
 
-        public TemplateTag SelectById(int id)
+        public IEnumerable<TemplateTag> SelectById(int tagId, int valueId)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+                return context.TemplateTag.Where(x => x.TagId == tagId && x.TemplateId == valueId);
         }
 
         public bool Update(TemplateTag model, int id = -1)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                var memeTag = context.TemplateTag.FirstOrDefault(x => x.TagId == model.TagId && x.TemplateId == model.TemplateId);
+                if (memeTag == null)
+                    return false;
+                memeTag.TagId = model.TagId;
+                memeTag.TemplateId = model.TemplateId;
+
+                context.SaveChanges();
+
+                return true;
+            }
         }
     }
 }

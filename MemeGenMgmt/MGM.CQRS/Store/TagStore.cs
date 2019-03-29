@@ -1,36 +1,71 @@
-﻿using MGM.API.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using MGM.API.Models;
 
 namespace MGM.CQRS.Store
 {
     internal class TagStore
-        : IDbMGMStoreCRUD<TagSet>
+        : IDbMgmStoreCrud<TagSet>
     {
         public bool Delete(TagSet model, int id = -1)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                if (id != -1)
+                {
+                    var tag = context.TagSet.FirstOrDefault(x => x.Id == id);
+                    if (tag == null) return false;
+                    {
+                        context.TagSet.Remove(tag);
+                        context.SaveChanges();
+                        return context.MemesSet.FirstOrDefault(x => x.Id == id) == null;
+                    }
+                }
+
+                context.Attach(model);
+                context.TagSet.Remove(model);
+                context.SaveChanges();
+                return context.TagSet.FirstOrDefault(x => x.Id == model.Id) == null;
+            }
         }
 
-        public bool Insert(TagSet model)
+        public void Insert(TagSet model)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                context.TagSet.Add(model);
+                context.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<TagSet> Select()
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+                return context.TagSet;
         }
 
         public TagSet SelectById(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+                return context.TagSet.FirstOrDefault(x => x.Id == id);
         }
 
         public bool Update(TagSet model, int id = -1)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                var tag = id != -1
+                    ? context.TagSet.FirstOrDefault(x => x.Id == id)
+                    : context.TagSet.FirstOrDefault(x => x.Id == model.Id);
+                if (tag == null)
+                    return false;
+
+                tag.Description = model.Description;
+
+                context.SaveChangesAsync();
+                return true;
+            }
         }
     }
 }

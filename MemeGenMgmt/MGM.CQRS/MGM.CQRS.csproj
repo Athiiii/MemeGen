@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Store\" />
+    <ProjectReference Include="..\MGM.API\MGM.API.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,36 +1,69 @@
-﻿using MGM.API.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using MGM.API.Models;
 
 namespace MGM.CQRS.Store
 {
     internal class TemplateStore
-        : IDbMGMStoreCRUD<TemplateSet>
+        : IDbMgmStoreCrud<TemplateSet>
     {
         public bool Delete(TemplateSet model, int id = -1)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                if (id != -1)
+                {
+                    var meme = context.TemplateSet.FirstOrDefault(x => x.Id == id);
+                    if (meme == null) return false;
+                    {
+                        context.TemplateSet.Remove(meme);
+                        context.SaveChanges();
+                        return context.TemplateSet.FirstOrDefault(x => x.Id == id) == null;
+                    }
+                }
+                context.Attach(model);
+                context.TemplateSet.Remove(model);
+                context.SaveChanges();
+                return context.TemplateSet.FirstOrDefault(x => x.Id == model.Id) == null;
+            }
         }
 
-        public bool Insert(TemplateSet model)
+        public void Insert(TemplateSet model)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                context.TemplateSet.Add(model);
+                context.SaveChangesAsync();
+            }
         }
 
         public IEnumerable<TemplateSet> Select()
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+                return context.TemplateSet;
         }
 
         public TemplateSet SelectById(int id)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+                return context.TemplateSet.FirstOrDefault(x => x.Id == id);
         }
 
         public bool Update(TemplateSet model, int id = -1)
         {
-            throw new NotImplementedException();
+            using (var context = new MGMContext())
+            {
+                var template = id != -1 ? context.TemplateSet.FirstOrDefault(x => x.Id == id) : context.TemplateSet.FirstOrDefault(x => x.Id == model.Id);
+                if (template == null)
+                    return false;
+
+                template.ImagePath = model.ImagePath;
+                template.Name = model.Name;
+
+                context.SaveChangesAsync();
+
+                return true;
+            }
         }
     }
 }

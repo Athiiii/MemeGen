@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace MGM.CQRS
 {
-    public interface IDbMgmStoreCrud<T>
+    public interface IdbMgmStoreTagCRUD<T>
     {
         IEnumerable<T> Select();
 
-        T SelectById(int id);
+        IEnumerable<T> SelectById(int tagId = 1, int valueId = 1);
 
         void Insert(T model);
 
