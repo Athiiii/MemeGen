@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using MGM.CQRS.Models;
+using System.Collections.Generic;
 using System.Linq;
-using MGM.API.Models;
 
 namespace MGM.CQRS.Store
 {
     internal class TemplateTagStore
-        : IdbMgmStoreTagCRUD<TemplateTag>
+        : IDbMgmStoreTagCrud<TemplateTag>
     {
         public bool Delete(TemplateTag model, int id = -1)
         {

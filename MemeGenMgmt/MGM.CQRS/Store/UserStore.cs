@@ -1,11 +1,10 @@
-﻿using System;
+﻿using MGM.CQRS.Models;
 using System.Collections.Generic;
 using System.Linq;
-using MGM.API.Models;
 
 namespace MGM.CQRS.Store
 {
-    internal class UserStore
+    public class UserStore
         : IDbMgmStoreCrud<UsersSet>
     {
         public bool Delete(UsersSet model, int id = -1)
@@ -34,7 +33,7 @@ namespace MGM.CQRS.Store
             using (var context = new MGMContext())
             {
                 context.UsersSet.Add(model);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

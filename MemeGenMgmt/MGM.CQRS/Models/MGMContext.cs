@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace MGM.API.Models
+namespace MGM.CQRS.Models
 {
     public partial class MGMContext : DbContext
     {

@@ -2,7 +2,7 @@
 
 namespace MGM.CQRS
 {
-    public interface IdbMgmStoreTagCRUD<T>
+    public interface IDbMgmStoreTagCrud<T>
     {
         IEnumerable<T> Select();
 

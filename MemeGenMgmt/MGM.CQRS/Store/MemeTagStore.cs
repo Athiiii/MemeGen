@@ -1,13 +1,11 @@
-﻿using System;
+﻿using MGM.CQRS.Models;
 using System.Collections.Generic;
 using System.Linq;
-using MGM.API.Models;
-using Remotion.Linq.Utilities;
 
 namespace MGM.CQRS.Store
 {
     internal class MemeTagStore
-        : IdbMgmStoreTagCRUD<MemesTag>
+        : IDbMgmStoreTagCrud<MemesTag>
     {
         public bool Delete(MemesTag model, int id = -1)
         {

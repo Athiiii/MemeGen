@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MGM.API.Models
+namespace MGM.CQRS.Models
 {
     public partial class TemplateSet
     {

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MGM.CQRS.Models;
+using System.Collections.Generic;
 using System.Linq;
-using MGM.API.Models;
 
 namespace MGM.CQRS.Store
 {
