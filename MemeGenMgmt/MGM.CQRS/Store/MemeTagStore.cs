@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MGM.CQRS.Store
 {
-    internal class MemeTagStore
+    public class MemeTagStore
         : IDbMgmStoreTagCrud<MemesTag>
     {
         public bool Delete(MemesTag model, int id = -1)
@@ -27,7 +27,7 @@ namespace MGM.CQRS.Store
             using (var context = new MGMContext())
             {
                 context.Add(model);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 

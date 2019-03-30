@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MGM.CQRS.Store
 {
-    internal class TemplateStore
+    public class TemplateStore
         : IDbMgmStoreCrud<TemplateSet>
     {
         public bool Delete(TemplateSet model, int id = -1)
@@ -33,7 +33,7 @@ namespace MGM.CQRS.Store
             using (var context = new MGMContext())
             {
                 context.TemplateSet.Add(model);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
@@ -60,7 +60,7 @@ namespace MGM.CQRS.Store
                 template.ImagePath = model.ImagePath;
                 template.Name = model.Name;
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
 
                 return true;
             }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MGM.CQRS.Store
 {
-    internal class TagStore
+    public class TagStore
         : IDbMgmStoreCrud<TagSet>
     {
         public bool Delete(TagSet model, int id = -1)
@@ -34,7 +34,7 @@ namespace MGM.CQRS.Store
             using (var context = new MGMContext())
             {
                 context.TagSet.Add(model);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
@@ -62,7 +62,7 @@ namespace MGM.CQRS.Store
 
                 tag.Description = model.Description;
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
                 return true;
             }
         }

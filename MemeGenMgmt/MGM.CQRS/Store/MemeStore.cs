@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MGM.CQRS.Store
 {
-    internal class MemeStore : IDbMgmStoreCrud<MemesSet>
+    public class MemeStore : IDbMgmStoreCrud<MemesSet>
     {
         public bool Delete(MemesSet model, int id = -1)
         {
@@ -33,7 +33,7 @@ namespace MGM.CQRS.Store
             using (var context = new MGMContext())
             {
                 context.MemesSet.Add(model);
-                context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
@@ -67,7 +67,7 @@ namespace MGM.CQRS.Store
                 meme.UsersId = model.UsersId;
                 meme.Watermark = model.Watermark;
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
 
                 return true;
             }

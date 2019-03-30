@@ -58,7 +58,7 @@ namespace MGM.CQRS.Store
                     return false;
 
 
-                context.SaveChangesAsync();
+                context.SaveChanges();
 
                 user.Mail = model.Mail;
                 user.Password = model.Password;
