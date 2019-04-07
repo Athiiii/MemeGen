@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using MGM.CQRS;
-using MGM.CQRS.Models;
-using MGM.CQRS.Store;
+//using MGM.CQRS;
+//using MGM.CQRS.Models;
+//using MGM.CQRS.Store;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MGM.API.Controllers

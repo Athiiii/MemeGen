@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace MGM.CQRS.Models
 {
-    public partial class UsersSet
+    public partial class User
     {
-        public UsersSet()
+        public User()
         {
-            MemesSet = new HashSet<MemesSet>();
+            Meme = new HashSet<Meme>();
         }
 
         public int Id { get; set; }
@@ -15,6 +15,6 @@ namespace MGM.CQRS.Models
         public string Mail { get; set; }
         public string Password { get; set; }
 
-        public virtual ICollection<MemesSet> MemesSet { get; set; }
+        public virtual ICollection<Meme> Meme { get; set; }
     }
 }

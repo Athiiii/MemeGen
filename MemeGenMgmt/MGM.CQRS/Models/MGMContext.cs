@@ -15,136 +15,181 @@ namespace MGM.CQRS.Models
         {
         }
 
-        public virtual DbSet<MemesSet> MemesSet { get; set; }
-        public virtual DbSet<MemesTag> MemesTag { get; set; }
-        public virtual DbSet<TagSet> TagSet { get; set; }
-        public virtual DbSet<TemplateSet> TemplateSet { get; set; }
-        public virtual DbSet<TemplateTag> TemplateTag { get; set; }
-        public virtual DbSet<UsersSet> UsersSet { get; set; }
+        public virtual DbSet<Meme> Meme { get; set; }
+        public virtual DbSet<Memetag> Memetag { get; set; }
+        public virtual DbSet<Tag> Tag { get; set; }
+        public virtual DbSet<Template> Template { get; set; }
+        public virtual DbSet<Templatetag> Templatetag { get; set; }
+        public virtual DbSet<User> User { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=DESKTOP-DJL8SSV\\SQLEXPRESS;Database=MGM;Trusted_Connection=True;");
+                optionsBuilder.UseMySql("server=localhost;database=MGM;user=root;pwd=1234;");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
-
-            modelBuilder.Entity<MemesSet>(entity =>
+            modelBuilder.Entity<Meme>(entity =>
             {
+                entity.ToTable("meme");
+
                 entity.HasIndex(e => e.TemplateId)
-                    .HasName("IX_FK_TemplateMemes");
+                    .HasName("fk_Meme_Template1_idx");
 
-                entity.HasIndex(e => e.UsersId)
-                    .HasName("IX_FK_UsersMemes");
+                entity.HasIndex(e => e.UserId)
+                    .HasName("fk_Meme_User_idx");
 
-                entity.Property(e => e.Bottom).IsRequired();
+                entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.Bottom).HasColumnType("varchar(255)");
 
                 entity.Property(e => e.Created).HasColumnType("datetime");
 
-                entity.Property(e => e.ImagePath).IsRequired();
+                entity.Property(e => e.FontSize).HasColumnType("int(11)");
 
-                entity.Property(e => e.Name).IsRequired();
+                entity.Property(e => e.ImagePath)
+                    .IsRequired()
+                    .HasColumnType("varchar(255)");
 
-                entity.Property(e => e.TemplateId).HasColumnName("Template_Id");
+                entity.Property(e => e.Name).HasColumnType("varchar(255)");
 
-                entity.Property(e => e.Top).IsRequired();
+                entity.Property(e => e.TemplateId)
+                    .HasColumnName("Template_Id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Top).HasColumnType("varchar(255)");
 
                 entity.Property(e => e.Updated).HasColumnType("datetime");
 
-                entity.Property(e => e.UsersId).HasColumnName("Users_Id");
+                entity.Property(e => e.UserId)
+                    .HasColumnName("User_Id")
+                    .HasColumnType("int(11)");
 
-                entity.Property(e => e.Watermark).IsRequired();
-
-                entity.HasOne(d => d.Template)
-                    .WithMany(p => p.MemesSet)
-                    .HasForeignKey(d => d.TemplateId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TemplateMemes");
-
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.MemesSet)
-                    .HasForeignKey(d => d.UsersId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UsersMemes");
-            });
-
-            modelBuilder.Entity<MemesTag>(entity =>
-            {
-                entity.HasKey(e => new { e.MemesId, e.TagId });
-
-                entity.HasIndex(e => e.TagId)
-                    .HasName("IX_FK_MemesTag_Tag");
-
-                entity.Property(e => e.MemesId).HasColumnName("Memes_Id");
-
-                entity.Property(e => e.TagId).HasColumnName("Tag_Id");
-
-                entity.HasOne(d => d.Memes)
-                    .WithMany(p => p.MemesTag)
-                    .HasForeignKey(d => d.MemesId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MemesTag_Memes");
-
-                entity.HasOne(d => d.Tag)
-                    .WithMany(p => p.MemesTag)
-                    .HasForeignKey(d => d.TagId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_MemesTag_Tag");
-            });
-
-            modelBuilder.Entity<TagSet>(entity =>
-            {
-                entity.Property(e => e.Description)
-                    .IsRequired()
-                    .HasColumnName("description");
-            });
-
-            modelBuilder.Entity<TemplateSet>(entity =>
-            {
-                entity.Property(e => e.ImagePath).IsRequired();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name");
-            });
-
-            modelBuilder.Entity<TemplateTag>(entity =>
-            {
-                entity.HasKey(e => new { e.TemplateId, e.TagId });
-
-                entity.HasIndex(e => e.TagId)
-                    .HasName("IX_FK_TemplateTag_Tag");
-
-                entity.Property(e => e.TemplateId).HasColumnName("Template_Id");
-
-                entity.Property(e => e.TagId).HasColumnName("Tag_Id");
-
-                entity.HasOne(d => d.Tag)
-                    .WithMany(p => p.TemplateTag)
-                    .HasForeignKey(d => d.TagId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TemplateTag_Tag");
+                entity.Property(e => e.Watermark).HasColumnType("varchar(100)");
 
                 entity.HasOne(d => d.Template)
-                    .WithMany(p => p.TemplateTag)
+                    .WithMany(p => p.Meme)
                     .HasForeignKey(d => d.TemplateId)
+                    .HasConstraintName("fk_Meme_Template1");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Meme)
+                    .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_TemplateTag_Template");
+                    .HasConstraintName("fk_Meme_User");
             });
 
-            modelBuilder.Entity<UsersSet>(entity =>
+            modelBuilder.Entity<Memetag>(entity =>
             {
-                entity.Property(e => e.Mail).IsRequired();
+                entity.HasKey(e => new { e.MemeId, e.TagId })
+                    .HasName("PRIMARY");
 
-                entity.Property(e => e.Password).IsRequired();
+                entity.ToTable("memetag");
 
-                entity.Property(e => e.Username).IsRequired();
+                entity.HasIndex(e => e.MemeId)
+                    .HasName("fk_Meme_has_Tag_Meme1_idx");
+
+                entity.HasIndex(e => e.TagId)
+                    .HasName("fk_Meme_has_Tag_Tag1_idx");
+
+                entity.Property(e => e.MemeId)
+                    .HasColumnName("Meme_Id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TagId)
+                    .HasColumnName("Tag_Id")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.Meme)
+                    .WithMany(p => p.Memetag)
+                    .HasForeignKey(d => d.MemeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Meme_has_Tag_Meme1");
+
+                entity.HasOne(d => d.Tag)
+                    .WithMany(p => p.Memetag)
+                    .HasForeignKey(d => d.TagId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Meme_has_Tag_Tag1");
+            });
+
+            modelBuilder.Entity<Tag>(entity =>
+            {
+                entity.ToTable("tag");
+
+                entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.Description).HasColumnType("varchar(255)");
+            });
+
+            modelBuilder.Entity<Template>(entity =>
+            {
+                entity.ToTable("template");
+
+                entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.ImagePath)
+                    .IsRequired()
+                    .HasColumnType("varchar(255)");
+
+                entity.Property(e => e.Name).HasColumnType("varchar(255)");
+            });
+
+            modelBuilder.Entity<Templatetag>(entity =>
+            {
+                entity.HasKey(e => new { e.TemplateId, e.TagId })
+                    .HasName("PRIMARY");
+
+                entity.ToTable("templatetag");
+
+                entity.HasIndex(e => e.TagId)
+                    .HasName("fk_Template_has_Tag_Tag1_idx");
+
+                entity.HasIndex(e => e.TemplateId)
+                    .HasName("fk_Template_has_Tag_Template1_idx");
+
+                entity.Property(e => e.TemplateId)
+                    .HasColumnName("Template_Id")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.TagId)
+                    .HasColumnName("Tag_Id")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.Tag)
+                    .WithMany(p => p.Templatetag)
+                    .HasForeignKey(d => d.TagId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Template_has_Tag_Tag1");
+
+                entity.HasOne(d => d.Template)
+                    .WithMany(p => p.Templatetag)
+                    .HasForeignKey(d => d.TemplateId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("fk_Template_has_Tag_Template1");
+            });
+
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.ToTable("user");
+
+                entity.Property(e => e.Id).HasColumnType("int(11)");
+
+                entity.Property(e => e.Mail)
+                    .IsRequired()
+                    .HasColumnType("varchar(45)");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnType("varchar(255)");
+
+                entity.Property(e => e.Username)
+                    .IsRequired()
+                    .HasColumnType("varchar(45)");
             });
         }
     }

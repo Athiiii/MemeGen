@@ -5,55 +5,55 @@ using System.Linq;
 
 namespace MGM.CQRS.Store
 {
-    public class MemeStore : IDbMgmStoreCrud<MemesSet>
+    public class MemeStore : IDbMgmStoreCrud<Meme>
     {
-        public bool Delete(MemesSet model, int id = -1)
+        public bool Delete(Meme model, int id = -1)
         {
             using (var context = new MGMContext())
             {
                 if (id != -1)
                 {
-                    var meme = context.MemesSet.FirstOrDefault(x => x.Id == id);
+                    var meme = context.Meme.FirstOrDefault(x => x.Id == id);
                     if (meme == null) return false;
                     {
-                        context.MemesSet.Remove(meme);
+                        context.Meme.Remove(meme);
                         context.SaveChanges();
-                        return context.MemesSet.FirstOrDefault(x => x.Id == id) == null;
+                        return context.Meme.FirstOrDefault(x => x.Id == id) == null;
                     }
                 }
                 context.Attach(model);
-                context.MemesSet.Remove(model);
+                context.Meme.Remove(model);
                 context.SaveChanges();
-                return context.MemesSet.FirstOrDefault(x => x.Id == model.Id) == null;
+                return context.Meme.FirstOrDefault(x => x.Id == model.Id) == null;
             }
         }
 
-        public void Insert(MemesSet model)
+        public void Insert(Meme model)
         {
             using (var context = new MGMContext())
             {
-                context.MemesSet.Add(model);
+                context.Meme.Add(model);
                 context.SaveChanges();
             }
         }
 
-        public IEnumerable<MemesSet> Select()
+        public IEnumerable<Meme> Select()
         {
             using (var context = new MGMContext())
-                return context.MemesSet;
+                return context.Meme.ToList();
         }
 
-        public MemesSet SelectById(int id)
+        public Meme SelectById(int id)
         {
             using (var context = new MGMContext())
-                return context.MemesSet.FirstOrDefault(x => x.Id == id);
+                return context.Meme.FirstOrDefault(x => x.Id == id);
         }
 
-        public bool Update(MemesSet model, int id = -1)
+        public bool Update(Meme model, int id = -1)
         {
             using (var context = new MGMContext())
             {
-                var meme = id != -1 ? context.MemesSet.FirstOrDefault(x => x.Id == id) : context.MemesSet.FirstOrDefault(x => x.Id == model.Id);
+                var meme = id != -1 ? context.Meme.FirstOrDefault(x => x.Id == id) : context.Meme.FirstOrDefault(x => x.Id == model.Id);
                 if (meme == null)
                     return false;
                 meme.Bottom = model.Bottom;
@@ -64,7 +64,7 @@ namespace MGM.CQRS.Store
                 meme.TemplateId = model.TemplateId;
                 meme.Top = model.Top;
                 meme.Updated = DateTime.Now;
-                meme.UsersId = model.UsersId;
+                meme.UserId = model.UserId;
                 meme.Watermark = model.Watermark;
 
                 context.SaveChanges();

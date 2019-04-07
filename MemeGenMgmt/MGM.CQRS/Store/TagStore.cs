@@ -5,58 +5,58 @@ using System.Linq;
 namespace MGM.CQRS.Store
 {
     public class TagStore
-        : IDbMgmStoreCrud<TagSet>
+        : IDbMgmStoreCrud<Tag>
     {
-        public bool Delete(TagSet model, int id = -1)
+        public bool Delete(Tag model, int id = -1)
         {
             using (var context = new MGMContext())
             {
                 if (id != -1)
                 {
-                    var tag = context.TagSet.FirstOrDefault(x => x.Id == id);
+                    var tag = context.Tag.FirstOrDefault(x => x.Id == id);
                     if (tag == null) return false;
                     {
-                        context.TagSet.Remove(tag);
+                        context.Tag.Remove(tag);
                         context.SaveChanges();
-                        return context.MemesSet.FirstOrDefault(x => x.Id == id) == null;
+                        return context.Tag.FirstOrDefault(x => x.Id == id) == null;
                     }
                 }
 
                 context.Attach(model);
-                context.TagSet.Remove(model);
+                context.Tag.Remove(model);
                 context.SaveChanges();
-                return context.TagSet.FirstOrDefault(x => x.Id == model.Id) == null;
+                return context.Tag.FirstOrDefault(x => x.Id == model.Id) == null;
             }
         }
 
-        public void Insert(TagSet model)
+        public void Insert(Tag model)
         {
             using (var context = new MGMContext())
             {
-                context.TagSet.Add(model);
+                context.Tag.Add(model);
                 context.SaveChanges();
             }
         }
 
-        public IEnumerable<TagSet> Select()
+        public IEnumerable<Tag> Select()
         {
             using (var context = new MGMContext())
-                return context.TagSet;
+                return context.Tag.ToList();
         }
 
-        public TagSet SelectById(int id)
+        public Tag SelectById(int id)
         {
             using (var context = new MGMContext())
-                return context.TagSet.FirstOrDefault(x => x.Id == id);
+                return context.Tag.FirstOrDefault(x => x.Id == id);
         }
 
-        public bool Update(TagSet model, int id = -1)
+        public bool Update(Tag model, int id = -1)
         {
             using (var context = new MGMContext())
             {
                 var tag = id != -1
-                    ? context.TagSet.FirstOrDefault(x => x.Id == id)
-                    : context.TagSet.FirstOrDefault(x => x.Id == model.Id);
+                    ? context.Tag.FirstOrDefault(x => x.Id == id)
+                    : context.Tag.FirstOrDefault(x => x.Id == model.Id);
                 if (tag == null)
                     return false;
 

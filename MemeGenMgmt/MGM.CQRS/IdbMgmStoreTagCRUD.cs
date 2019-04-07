@@ -10,8 +10,6 @@ namespace MGM.CQRS
 
         void Insert(T model);
 
-        bool Update(T model, int id = -1);
-
-        bool Delete(T model, int id = -1);
+        bool Delete(T model, int tagId = -1, int modelId = -1);
     }
 }

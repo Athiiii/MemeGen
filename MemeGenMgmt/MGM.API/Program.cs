@@ -1,10 +1,6 @@
-﻿using MGM.CQRS;
-using MGM.CQRS.Models;
-using MGM.CQRS.Store;
-using Microsoft.AspNetCore;
+﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using UserStore = MGM.CQRS.Store.UserStore;
 
 namespace MGM.API
 {
@@ -18,5 +14,6 @@ namespace MGM.API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>();
+        
     }
 }

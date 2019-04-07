@@ -17,12 +17,12 @@ namespace MGM.CQRS.Test
         private UserStore _userStore;
 
         //Models
-        private UsersSet _user;
-        private MemesSet _meme;
-        private MemesTag _memesTag;
-        private TagSet _tag;
-        private TemplateSet _template;
-        private TemplateTag _templateTag;
+        private User _user;
+        private Meme _meme;
+        private Memetag _memesTag;
+        private Tag _tag;
+        private Template _template;
+        private Templatetag _templateTag;
 
         //Functions
         private Random _random;
@@ -43,7 +43,7 @@ namespace MGM.CQRS.Test
         [Test, Order(1)]
         public void UserInsert()
         {
-            _user = new UsersSet
+            _user = new User
             {
                 Mail = Guid.NewGuid() + "@bluewin.ch",
                 Password = Guid.NewGuid().ToString(),
@@ -54,7 +54,7 @@ namespace MGM.CQRS.Test
             using (var context = new MGMContext())
             {
                 context.Attach(_user);
-                var user = context.UsersSet.FirstOrDefault(x => x.Id == _user.Id);
+                var user = context.User.FirstOrDefault(x => x.Id == _user.Id);
                 Assert.IsNotNull(user);
             }
         }
@@ -69,7 +69,7 @@ namespace MGM.CQRS.Test
         [Test, Order(3)]
         public void UserUpdate()
         {
-            var user = new UsersSet
+            var user = new User
             {
                 Mail = Guid.NewGuid() + "@bluewin.ch",
                 Password = Guid.NewGuid().ToString(),
@@ -80,8 +80,7 @@ namespace MGM.CQRS.Test
 
             using (var context = new MGMContext())
             {
-                context.Attach(user);
-                var updatedUser = context.UsersSet.FirstOrDefault(x => x.Id == user.Id);
+                var updatedUser = context.User.FirstOrDefault(x => x.Id == _user.Id);
 
                 Assert.IsNotNull(updatedUser);
                 Assert.AreEqual(user.Mail, updatedUser.Mail);
@@ -100,7 +99,7 @@ namespace MGM.CQRS.Test
         [Test, Order(5)]
         public void TemplateInsert()
         {
-            _template = new TemplateSet
+            _template = new Template
             {
                 ImagePath = Guid.NewGuid() + ".png",
                 Name = Guid.NewGuid().ToString()
@@ -108,8 +107,9 @@ namespace MGM.CQRS.Test
 
             using (var context = new MGMContext())
             {
+                _templateStore.Insert(_template);
                 context.Attach(_template);
-                var template = context.TemplateSet.FirstOrDefault(x => x.Id == _template.Id);
+                var template = context.Template.FirstOrDefault(x => x.Id == _template.Id);
 
                 Assert.IsNotNull(template);
             }
@@ -125,7 +125,7 @@ namespace MGM.CQRS.Test
         [Test, Order(7)]
         public void TemplateUpdate()
         {
-            var template = new TemplateSet
+            var template = new Template
             {
                 ImagePath = Guid.NewGuid().ToString(),
                 Name = Guid.NewGuid().ToString()
@@ -134,14 +134,12 @@ namespace MGM.CQRS.Test
 
             using (var context = new MGMContext())
             {
-                var updatedTemplate = context.TemplateSet.FirstOrDefault(x => x.Id == _template.Id);
-                Assert.IsNotNull(template);
+                var updatedTemplate = context.Template.FirstOrDefault(x => x.Id == _template.Id);
 
-                if (updatedTemplate != null)
-                {
-                    Assert.AreEqual(_template.ImagePath, updatedTemplate.ImagePath);
-                    Assert.AreEqual(_template.Name, updatedTemplate.Name);
-                }
+                Assert.IsNotNull(updatedTemplate);
+                Assert.AreEqual(template.ImagePath, updatedTemplate.ImagePath);
+                Assert.AreEqual(template.Name, updatedTemplate.Name);
+
             }
         }
 
@@ -154,16 +152,16 @@ namespace MGM.CQRS.Test
         [Test, Order(9)]
         public void TagInsert()
         {
-            _tag = new TagSet
+            _tag = new Tag
             {
-                Description =  Guid.NewGuid().ToString()
+                Description = Guid.NewGuid().ToString()
             };
-            _tagStore.Insert(_tag);
 
             using (var context = new MGMContext())
             {
+                _tagStore.Insert(_tag);
                 context.Attach(_tag);
-                var tag = context.TagSet.FirstOrDefault(x => x.Id == _tag.Id);
+                var tag = context.Tag.FirstOrDefault(x => x.Id == _tag.Id);
 
                 Assert.IsNotNull(tag);
             }
@@ -179,15 +177,15 @@ namespace MGM.CQRS.Test
         [Test, Order(11)]
         public void TagUpdate()
         {
-            var tag = new TagSet
+            var tag = new Tag
             {
                 Description = Guid.NewGuid().ToString()
             };
-            _tagStore.Update(tag, _tag.Id);
 
             using (var context = new MGMContext())
             {
-                var updatedTag = context.TagSet.FirstOrDefault(x => x.Id == _tag.Id);
+                _tagStore.Update(tag, _tag.Id);
+                var updatedTag = context.Tag.FirstOrDefault(x => x.Id == _tag.Id);
 
                 Assert.IsNotNull(updatedTag);
                 Assert.AreEqual(updatedTag.Description, tag.Description);
@@ -203,7 +201,7 @@ namespace MGM.CQRS.Test
         [Test, Order(13)]
         public void MemeInsert()
         {
-            _meme = new MemesSet
+            _meme = new Meme
             {
                 Bottom = Guid.NewGuid().ToString(),
                 Created = DateTime.Now,
@@ -213,14 +211,14 @@ namespace MGM.CQRS.Test
                 Top = Guid.NewGuid().ToString(),
                 Updated = DateTime.Now,
                 Watermark = Guid.NewGuid().ToString(),
-                UsersId = 1
+                UserId = 1
             };
-            _memeStore.Insert(_meme);
 
             using (var context = new MGMContext())
             {
+                _memeStore.Insert(_meme);
                 context.Attach(_meme);
-                var meme = context.MemesSet.FirstOrDefault(x => x.Id == _meme.Id);
+                var meme = context.Meme.FirstOrDefault(x => x.Id == _meme.Id);
 
                 Assert.IsNotNull(meme);
             }
@@ -236,34 +234,29 @@ namespace MGM.CQRS.Test
         [Test, Order(14)]
         public void MemeUpdate()
         {
-            var meme = new MemesSet
-            {
-                Bottom = Guid.NewGuid().ToString(),
-                Created = DateTime.Now,
-                FontSize = _random.Next(10,20),
-                ImagePath = Guid.NewGuid().ToString(),
-                Name = Guid.NewGuid().ToString(),
-                Top = Guid.NewGuid().ToString(),
-                Updated = DateTime.Now,
-                Watermark = Guid.NewGuid().ToString()
-            };
-
-            _memeStore.Update(meme, _meme.Id);
+            _meme.Bottom = Guid.NewGuid().ToString();
+            _meme.Created = DateTime.Now;
+            _meme.FontSize = _random.Next(10, 20);
+            _meme.ImagePath = Guid.NewGuid().ToString();
+            _meme.Name = Guid.NewGuid().ToString();
+            _meme.Top = Guid.NewGuid().ToString();
+            _meme.Updated = DateTime.Now;
+            _meme.Watermark = Guid.NewGuid().ToString();
 
             using (var context = new MGMContext())
             {
-                var updatedMeme = context.MemesSet.FirstOrDefault(x => x.Id == _meme.Id);
+                _memeStore.Update(_meme, _meme.Id);
+                var updatedMeme = context.Meme.FirstOrDefault(x => x.Id == _meme.Id);
+                
                 Assert.IsNotNull(updatedMeme);
 
-                Assert.AreEqual(updatedMeme.Bottom, meme.Bottom);
-                Assert.AreEqual(updatedMeme.Created, meme.Created);
-                Assert.AreEqual(updatedMeme.FontSize, meme.FontSize);
-                Assert.AreEqual(updatedMeme.FontSize, meme.FontSize);
-                Assert.AreEqual(updatedMeme.ImagePath, meme.ImagePath);
-                Assert.AreEqual(updatedMeme.Name, meme.Name);
-                Assert.AreEqual(updatedMeme.Top, meme.Top);
-                Assert.AreEqual(updatedMeme.Updated, meme.Updated);
-                Assert.AreEqual(updatedMeme.Watermark, meme.Watermark);
+                Assert.AreEqual(updatedMeme.Bottom, _meme.Bottom);
+                Assert.AreEqual(updatedMeme.FontSize, _meme.FontSize);
+                Assert.AreEqual(updatedMeme.FontSize, _meme.FontSize);
+                Assert.AreEqual(updatedMeme.ImagePath, _meme.ImagePath);
+                Assert.AreEqual(updatedMeme.Name, _meme.Name);
+                Assert.AreEqual(updatedMeme.Top, _meme.Top);
+                Assert.AreEqual(updatedMeme.Watermark, _meme.Watermark);
             }
         }
 
@@ -276,28 +269,93 @@ namespace MGM.CQRS.Test
         [Test, Order(17)]
         public void MemeTagInsert()
         {
+            _meme = new Meme
+            {
+                Bottom = Guid.NewGuid().ToString(),
+                Created = DateTime.Now,
+                FontSize = _random.Next(10, 20),
+                ImagePath = Guid.NewGuid().ToString() + ".png",
+                Name = Guid.NewGuid().ToString(),
+                Top = Guid.NewGuid().ToString(),
+                Updated = DateTime.Now,
+                Watermark = Guid.NewGuid().ToString(),
+                UserId = 1
+            };
+
+            _tag = new Tag
+            {
+                Description = Guid.NewGuid().ToString()
+            };
+
+            _memeStore.Insert(_meme);
+            _tagStore.Insert(_tag);
+
+            using (var context = new MGMContext())
+            {
+                context.Attach(_tag);
+                context.Attach(_meme);
+                _memesTag = new Memetag
+                {
+                    TagId = _tag.Id,
+                    MemeId = _meme.Id
+                };
+                _memeTagStore.Insert(_memesTag);
+                context.Attach(_memesTag);
+
+                var insertedMemeTag =
+                    context.Memetag.FirstOrDefault(x => x.TagId == _memesTag.TagId && x.MemeId == _memesTag.MemeId);
+                Assert.IsNotNull(insertedMemeTag);
+            }
         }
 
         [Test, Order(18)]
         public void MemeTagSelect()
         {
-            Assert.AreEqual(_memeTagStore.SelectById(_memesTag.TagId, _memesTag.MemesId).Count(), 1);
+            Assert.AreEqual(_memeTagStore.SelectById(_memesTag.TagId, _memesTag.MemeId).Count(), 1);
             Assert.Greater(_memeTagStore.Select().Count(), 0);
         }
 
         [Test, Order(19)]
         public void MemeTagUpdate()
-        {
-        }
+        { }
 
         [Test, Order(20)]
         public void MemeTagDelete()
         {
+            Assert.IsTrue(_memeTagStore.Delete(null, _memesTag.TagId, _memesTag.MemeId));
         }
 
         [Test, Order(21)]
         public void TemplateTagInsert()
         {
+            _template = new Template
+            {
+                ImagePath = Guid.NewGuid().ToString(),
+                Name = Guid.NewGuid().ToString()
+            };
+
+            _tag = new Tag
+            {
+                Description = Guid.NewGuid().ToString()
+            };
+
+            using (var context = new MGMContext())
+            {
+                _templateStore.Insert(_template);
+                _tagStore.Insert(_tag);
+
+                context.Attach(_template);
+                context.Attach(_tag);
+
+                _templateTag = new Templatetag
+                {
+                    TagId = _tag.Id,
+                    TemplateId = _template.Id
+                };
+                _templateTagStore.Insert(_templateTag);
+
+                Assert.IsNotNull(context.Templatetag.FirstOrDefault(x => x.TagId == _templateTag.TagId && x.TemplateId == _templateTag.TemplateId));
+            }
         }
 
         [Test, Order(22)]
@@ -315,6 +373,7 @@ namespace MGM.CQRS.Test
         [Test, Order(24)]
         public void TemplateTagDelete()
         {
+            Assert.IsTrue(_templateTagStore.Delete(null, _tag.Id, _template.Id));
         }
     }
 }

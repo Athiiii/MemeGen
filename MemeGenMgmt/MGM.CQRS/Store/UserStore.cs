@@ -5,65 +5,64 @@ using System.Linq;
 namespace MGM.CQRS.Store
 {
     public class UserStore
-        : IDbMgmStoreCrud<UsersSet>
+        : IDbMgmStoreCrud<User>
     {
-        public bool Delete(UsersSet model, int id = -1)
+        public bool Delete(User model, int id = -1)
         {
             using (var context = new MGMContext())
             {
                 if (id != -1)
                 {
-                    var user = context.UsersSet.FirstOrDefault(x => x.Id == id);
+                    var user = context.User.FirstOrDefault(x => x.Id == id);
                     if (user == null) return false;
                     {
-                        context.UsersSet.Remove(user);
+                        context.User.Remove(user);
                         context.SaveChanges();
-                        return context.UsersSet.FirstOrDefault(x => x.Id == id) == null;
+                        return context.User.FirstOrDefault(x => x.Id == id) == null;
                     }
                 }
                 context.Attach(model);
-                context.UsersSet.Remove(model);
+                context.User.Remove(model);
                 context.SaveChanges();
-                return context.UsersSet.FirstOrDefault(x => x.Id == model.Id) == null;
+                return context.User.FirstOrDefault(x => x.Id == model.Id) == null;
             }
         }
 
-        public void Insert(UsersSet model)
+        public void Insert(User model)
         {
             using (var context = new MGMContext())
             {
-                context.UsersSet.Add(model);
+                context.User.Add(model);
                 context.SaveChanges();
             }
         }
 
-        public IEnumerable<UsersSet> Select()
+        public IEnumerable<User> Select()
         {
             using (var context = new MGMContext())
-                return context.UsersSet;
+                return context.User.ToList();
         }
 
-        public UsersSet SelectById(int id)
+        public User SelectById(int id)
         {
             using (var context = new MGMContext())
-                return context.UsersSet.FirstOrDefault(x => x.Id == id);
+                return context.User.FirstOrDefault(x => x.Id == id);
         }
 
-        public bool Update(UsersSet model, int id = -1)
+        public bool Update(User model, int id = -1)
         {
             using (var context = new MGMContext())
             {
-                var user = id != -1 ? context.UsersSet.FirstOrDefault(x => x.Id == id) : context.UsersSet.FirstOrDefault(x => x.Id == model.Id);
+                var user = id != -1 ? context.User.FirstOrDefault(x => x.Id == id) : context.User.FirstOrDefault(x => x.Id == model.Id);
                 if (user == null)
                     return false;
-
-
-                context.SaveChanges();
 
                 user.Mail = model.Mail;
                 user.Password = model.Password;
                 user.Username = model.Username;
-               
+
+                context.SaveChanges();
+
                 return true;
             }
         }
