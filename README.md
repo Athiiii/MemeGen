@@ -51,4 +51,7 @@ This Application runs on **Enter domain**
 ## Mockup
 
 * This image shows the relationship between all Modals and Windows 
-![Alt text](documentation/mockup.png?raw=true "Title")
+![MockupView](documentation/mockup.png?raw=true "Title")
+
+* This image shows the Dabase Schema with the relations
+![DBView](documentation/databaseMockup.png?raw=true "Title")
