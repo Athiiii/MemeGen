@@ -54,4 +54,4 @@ This Application runs on **Enter domain**
 ![MockupView](documentation/mockup.png?raw=true "Title")
 
 * This image shows the Dabase Schema with the relations
-![DBView](documentation/databaseMockup.png?raw=true "Title")
+![DBView](documentation/databaseMockupMySQL.png?raw=true "Title")
