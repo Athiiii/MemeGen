@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MGM.CQRS;
+using MGM.CQRS.Models;
+//using MGM.CQRS;
+//using MGM.CQRS.Models;
+//using MGM.CQRS.Store;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MGM.API.Controllers
@@ -10,6 +15,12 @@ namespace MGM.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private IDbMgmStoreCrud<Meme> _store;
+
+        public ValuesController(IDbMgmStoreCrud<Meme> store)
+        {
+            _store = store;
+        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
