@@ -19,6 +19,13 @@ Give examples
 
 ### Installing
 
+### Database Models Creation
+
+The Database is MySQL. To create the Models out of MySQL you have to run following command:
+```
+dotnet ef dbcontext scaffold "server=localhost;database=MGM;user=root;pwd=1234;" "Pomelo.EntityFrameworkCore.MySql" -o ..\MGM.CQRS\Models -f
+```
+
 ## Running the tests
 
 ## Deployment
