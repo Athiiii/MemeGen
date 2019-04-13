@@ -13,14 +13,6 @@ namespace MGM.API.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        private ILogger<ValuesController> _logger;
-
-        public ValuesController(ILogger<ValuesController> logger)
-        {
-            _logger = logger;
-            
-            _logger.LogInformation("hello");
-        }
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()

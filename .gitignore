@@ -344,4 +344,6 @@ healthchecksdb
 MigrationBackup/
 
 # Logger folder
-**/logs/*.json
+**/logs/debug/*.json
+**/logs/info/*.json
+**/logs/error/*.json
