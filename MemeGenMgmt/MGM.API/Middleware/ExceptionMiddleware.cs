@@ -27,6 +27,7 @@ namespace MGM.API.Middleware
                         //log Message
                         logger.LogError($"An error appeared: {contextFeature.Error}");
 
+                        //sending Response
                         await context.Response.WriteAsync(new ErrorDetails()
                         {
                             StatusCode = context.Response.StatusCode,
