@@ -10,9 +10,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MGM.API.Services
 {
-    public class DatabaseServices
+    public static class DatabaseServices
     {
-        public static IServiceCollection InitializeDatabase(IServiceCollection service)
+        public static IServiceCollection InitializeDatabase(this IServiceCollection service)
         {
             service.AddScoped<IDbMgmStoreCrud<Meme>, MemeStore>();
             service.AddScoped<IDbMgmStoreCrud<Tag>, TagStore>();
