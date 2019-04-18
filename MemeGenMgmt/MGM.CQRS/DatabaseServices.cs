@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MGM.CQRS;
-using MGM.CQRS.Models;
+﻿using MGM.CQRS.Models;
 using MGM.CQRS.Store;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MGM.API.Services
+namespace MGM.CQRS
 {
     public static class DatabaseServices
     {
