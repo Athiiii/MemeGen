@@ -43,7 +43,7 @@ dotnet ef dbcontext scaffold "server=localhost;database=MGM;user=root;pwd=1234;"
 See also the list of [contributors](https://github.com/Athiiii/MemeGen/contributors) who participated in this project.
 
 ## License
-It's only a Project to train my programming skills. 
+MIT: See LICENCE File for more information
 
 ## Hosting
 This Application runs on **Enter domain**
