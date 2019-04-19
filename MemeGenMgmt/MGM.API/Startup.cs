@@ -43,13 +43,9 @@ namespace MGM.API
                 app.UseHsts();
             }
 
-            app.UseDefaultFiles(new DefaultFilesOptions
-            {
-                DefaultFileNames = new List<string>
-                {
-                    "index.html"
-                }
-            });
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.AddExceptionHandler(_logger);
 
             app.UseHttpsRedirection();
