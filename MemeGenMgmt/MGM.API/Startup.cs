@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using MGM.API.Middleware;
+using MGM.CQRS;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using MGM.CQRS;
-using MGM.CQRS.Models;
-using MGM.CQRS.Store;
-using MGM.API.Services;
 
 namespace MGM.API
 {
@@ -50,6 +42,14 @@ namespace MGM.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseDefaultFiles(new DefaultFilesOptions
+            {
+                DefaultFileNames = new List<string>
+                {
+                    "index.html"
+                }
+            });
             app.AddExceptionHandler(_logger);
 
             app.UseHttpsRedirection();
