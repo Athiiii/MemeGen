@@ -34,7 +34,8 @@ dotnet ef dbcontext scaffold "server=localhost;database=MGM;user=root;pwd=1234;"
 
 - Visual Studio 2017
 - .NET CORE 2.2
-- Microsoft SQL Server 2017
+- MySql Server
+- VueJs 2
 
 ## Authors
 
