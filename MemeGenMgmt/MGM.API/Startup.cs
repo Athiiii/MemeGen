@@ -13,6 +13,7 @@ namespace MGM.API
     public class Startup
     {
         private readonly ILogger<Startup> _logger;
+        public IConfiguration Configuration { get; }
 
         public Startup(IConfiguration configuration, ILogger<Startup> logger)
         {
@@ -20,13 +21,13 @@ namespace MGM.API
             _logger = logger;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.InitializeDatabase();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "wwwroot/dist"; });
             
         }
 
@@ -40,16 +41,37 @@ namespace MGM.API
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseExceptionHandler("/Error");
+                app.UseHsts();
                 app.UseHsts();
             }
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseSpaStaticFiles();
 
             app.AddExceptionHandler(_logger);
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "api/values"
+                );
+            });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "wwwroot";
+
+                if (env.IsDevelopment())
+                {
+                    //The Vue app port
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
+                }
+            });
         }
     }
 }

@@ -1,0 +1,48 @@
+2019-04-24 21:27:36.2241 Info Message Template Auto Format enabled
+2019-04-24 21:27:36.2483 Info Loading assembly: NLog.Web.AspNetCore
+2019-04-24 21:27:37.0656 Info Adding target FileTarget(Name=infoData)
+2019-04-24 21:27:37.0656 Info Adding target FileTarget(Name=debugData)
+2019-04-24 21:27:37.1125 Info Adding target FileTarget(Name=errorData)
+2019-04-24 21:27:37.1720 Info Adding target FileTarget(Name=otherFile-web)
+2019-04-24 21:27:37.2720 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-04-24 21:27:37.7352 Info Found 68 configuration items
+2019-04-24 21:40:09.2094 Info Message Template Auto Format enabled
+2019-04-24 21:40:09.2345 Info Loading assembly: NLog.Web.AspNetCore
+2019-04-24 21:40:09.4453 Info Adding target FileTarget(Name=infoData)
+2019-04-24 21:40:09.4453 Info Adding target FileTarget(Name=debugData)
+2019-04-24 21:40:09.4855 Info Adding target FileTarget(Name=errorData)
+2019-04-24 21:40:09.5081 Info Adding target FileTarget(Name=otherFile-web)
+2019-04-24 21:40:09.5563 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-04-24 21:40:09.6147 Info Found 68 configuration items
+2019-04-24 21:40:58.0979 Info Message Template Auto Format enabled
+2019-04-24 21:40:58.1324 Info Loading assembly: NLog.Web.AspNetCore
+2019-04-24 21:40:58.6162 Info Adding target FileTarget(Name=infoData)
+2019-04-24 21:40:58.6162 Info Adding target FileTarget(Name=debugData)
+2019-04-24 21:40:58.6407 Info Adding target FileTarget(Name=errorData)
+2019-04-24 21:40:58.6547 Info Adding target FileTarget(Name=otherFile-web)
+2019-04-24 21:40:58.6962 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-04-24 21:40:58.8380 Info Found 68 configuration items
+2019-04-24 21:42:36.1642 Info Message Template Auto Format enabled
+2019-04-24 21:42:36.2066 Info Loading assembly: NLog.Web.AspNetCore
+2019-04-24 21:42:36.5353 Info Adding target FileTarget(Name=infoData)
+2019-04-24 21:42:36.5353 Info Adding target FileTarget(Name=debugData)
+2019-04-24 21:42:36.6277 Info Adding target FileTarget(Name=errorData)
+2019-04-24 21:42:36.6810 Info Adding target FileTarget(Name=otherFile-web)
+2019-04-24 21:42:36.7266 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-04-24 21:42:36.8036 Info Found 68 configuration items
+2019-04-24 21:45:25.5800 Info Message Template Auto Format enabled
+2019-04-24 21:45:25.6161 Info Loading assembly: NLog.Web.AspNetCore
+2019-04-24 21:45:25.8458 Info Adding target FileTarget(Name=infoData)
+2019-04-24 21:45:25.8458 Info Adding target FileTarget(Name=debugData)
+2019-04-24 21:45:25.8750 Info Adding target FileTarget(Name=errorData)
+2019-04-24 21:45:25.8965 Info Adding target FileTarget(Name=otherFile-web)
+2019-04-24 21:45:25.9363 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-04-24 21:45:25.9841 Info Found 68 configuration items
+2019-04-24 21:46:35.1060 Info Message Template Auto Format enabled
+2019-04-24 21:46:35.1389 Info Loading assembly: NLog.Web.AspNetCore
+2019-04-24 21:46:35.3034 Info Adding target FileTarget(Name=infoData)
+2019-04-24 21:46:35.3034 Info Adding target FileTarget(Name=debugData)
+2019-04-24 21:46:35.3372 Info Adding target FileTarget(Name=errorData)
+2019-04-24 21:46:35.3536 Info Adding target FileTarget(Name=otherFile-web)
+2019-04-24 21:46:35.4316 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-04-24 21:46:35.5282 Info Found 68 configuration items
