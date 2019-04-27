@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MGM.CQRS;
 using MGM.CQRS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -33,7 +34,7 @@ namespace MGM.API.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] string[] value)
         {
         }
 

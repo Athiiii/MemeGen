@@ -24,11 +24,12 @@ namespace MGM.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.InitializeDatabase();
+            services.InitializeDatabase()
+                .AddCors()
+                .AddSpaStaticFiles(configuration => { configuration.RootPath = "wwwroot/dist"; });
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "wwwroot/dist"; });
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,6 +54,13 @@ namespace MGM.API
             app.AddExceptionHandler(_logger);
 
             app.UseHttpsRedirection();
+        
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials()
+            );
 
             app.UseMvc(routes =>
             {
@@ -60,17 +68,6 @@ namespace MGM.API
                     name: "default",
                     template: "api/values"
                 );
-            });
-
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = "wwwroot";
-
-                if (env.IsDevelopment())
-                {
-                    //The Vue app port
-                    spa.UseProxyToSpaDevelopmentServer("http://localhost:8080");
-                }
             });
         }
     }

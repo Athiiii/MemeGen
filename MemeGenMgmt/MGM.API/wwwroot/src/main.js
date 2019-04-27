@@ -3,9 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import VueResource from 'vue-resource'
 
+Vue.use(VueResource)
+
+Vue.http.options.root = 'https://localhost:5001'
 Vue.config.productionTip = false
-
+console.log(Vue.http.options.root)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
