@@ -26,7 +26,7 @@ namespace MGM.API
         {
             services.InitializeDatabase()
                 .AddCors()
-                .AddSpaStaticFiles(configuration => { configuration.RootPath = "wwwroot/dist"; });
+                .AddSpaStaticFiles(configuration => { configuration.RootPath = "/wwwroot"; });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
@@ -42,8 +42,7 @@ namespace MGM.API
             else
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseExceptionHandler("/Error");
-                app.UseHsts();
+                app.UseExceptionHandler("/index.html");
                 app.UseHsts();
             }
 

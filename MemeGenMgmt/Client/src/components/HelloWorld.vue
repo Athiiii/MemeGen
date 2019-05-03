@@ -18,12 +18,10 @@ export default {
     }
   },
   methods: {
-    submit() {
-      console.log(JSON.stringify(this.inputData))
-      
-      this.$http.post('/api/values', `['${this.inputData}']`)
+    submit () {
+      this.$http.get('api/values')
         .then(response => {
-          console.log(response)
+          this.reponse = response
         }, error => {
           console.log(error)
         })
