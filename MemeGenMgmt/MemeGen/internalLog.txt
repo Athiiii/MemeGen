@@ -1,0 +1,34 @@
+2019-05-10 21:56:42.3711 Info Message Template Auto Format enabled
+2019-05-10 21:56:42.4181 Info Loading assembly: NLog.Web.AspNetCore
+2019-05-10 21:56:43.1050 Info Adding target FileTarget(Name=infoData)
+2019-05-10 21:56:43.1110 Info Adding target FileTarget(Name=debugData)
+2019-05-10 21:56:43.1399 Info Adding target FileTarget(Name=errorData)
+2019-05-10 21:56:43.1796 Info Adding target FileTarget(Name=otherFile-web)
+2019-05-10 21:56:43.2334 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-05-10 21:56:43.5089 Info Found 68 configuration items
+2019-05-10 22:03:39.2555 Info Message Template Auto Format enabled
+2019-05-10 22:03:39.4110 Info Loading assembly: NLog.Web.AspNetCore
+2019-05-10 22:03:39.9636 Info Adding target FileTarget(Name=infoData)
+2019-05-10 22:03:39.9690 Info Adding target FileTarget(Name=debugData)
+2019-05-10 22:03:40.0145 Info Adding target FileTarget(Name=errorData)
+2019-05-10 22:03:40.0303 Info Adding target FileTarget(Name=otherFile-web)
+2019-05-10 22:03:40.0699 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-05-10 22:03:40.1187 Info Found 68 configuration items
+2019-05-10 22:08:53.0552 Info Message Template Auto Format enabled
+2019-05-10 22:08:53.1042 Info Loading assembly: NLog.Web.AspNetCore
+2019-05-10 22:08:54.4319 Info Adding target FileTarget(Name=infoData)
+2019-05-10 22:08:54.5821 Info Adding target FileTarget(Name=debugData)
+2019-05-10 22:08:54.6802 Info Adding target FileTarget(Name=errorData)
+2019-05-10 22:08:55.1684 Info Adding target FileTarget(Name=otherFile-web)
+2019-05-10 22:08:55.3123 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-05-10 22:08:56.1095 Info Found 68 configuration items
+2019-05-10 22:10:56.0746 Info AppDomain Shutting down. Logger closing...
+2019-05-10 22:10:56.1823 Info Logger has been shut down.
+2019-05-10 22:30:54.6576 Info Message Template Auto Format enabled
+2019-05-10 22:30:54.6836 Info Loading assembly: NLog.Web.AspNetCore
+2019-05-10 22:30:55.0335 Info Adding target FileTarget(Name=infoData)
+2019-05-10 22:30:55.0335 Info Adding target FileTarget(Name=debugData)
+2019-05-10 22:30:55.0612 Info Adding target FileTarget(Name=errorData)
+2019-05-10 22:30:55.0756 Info Adding target FileTarget(Name=otherFile-web)
+2019-05-10 22:30:55.1115 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-05-10 22:30:55.1719 Info Found 68 configuration items

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGM.CQRS", "MGM.CQRS\MGM.CQ
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MGM.CQRS.Test", "MGM.CQRS.Test\MGM.CQRS.Test.csproj", "{AC309C17-ADE9-4E92-B928-320695A7D530}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemeGen", "MemeGen\MemeGen.csproj", "{B0C58C32-51B3-4CE4-BC86-4102FF5C734E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{AC309C17-ADE9-4E92-B928-320695A7D530}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC309C17-ADE9-4E92-B928-320695A7D530}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC309C17-ADE9-4E92-B928-320695A7D530}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B0C58C32-51B3-4CE4-BC86-4102FF5C734E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C58C32-51B3-4CE4-BC86-4102FF5C734E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C58C32-51B3-4CE4-BC86-4102FF5C734E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C58C32-51B3-4CE4-BC86-4102FF5C734E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
