@@ -1,12 +1,16 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import { routes } from './routes'
+import Router from 'vue-router'
+import AppRoot from '../components/app-root'
 
-Vue.use(VueRouter)
+Vue.use(Router)
 
-let router = new VueRouter({
-  mode: 'history',
-  routes
+export default new Router({
+  routes: [
+    {
+      path: '/',
+      name: 'AppRoot',
+      component: AppRoot
+    }
+  ],
+  mode: 'history'
 })
-
-export default router

@@ -1,29 +1,28 @@
 <template>
-    <div id="app" class="container-fluid">
-        <div class="row">
-            <div class="col-md-3">
-                <nav-menu params="route: route"></nav-menu>
-            </div>
-            <div class="col-sm-9">
-                <router-view></router-view>
-            </div>
-        </div>
-    </div>
+  <v-app id="inspire" :dark="darkmode">
+    <app-navigation></app-navigation>
+    <app-search></app-search>
+    <v-layout align-center>
+      <v-flex lg3>
+        <v-btn @click="darkmode = !darkmode">Activate Dark mode</v-btn>
+      </v-flex>
+    </v-layout>
+  </v-app>
 </template>
 
 <script>
-    import NavMenu from './nav-menu'
+import appSearch from "./appSearch";
+import appNavigation from "./appNavigation";
 
-    export default {
-      components: {
-        'nav-menu': NavMenu
-      },
-
-      data () {
-        return {}
-      }
-    }
+export default {
+  data() {
+    return {
+      darkmode: false
+    };
+  },
+  components: {
+    appSearch,
+    appNavigation
+  }
+};
 </script>
-
-<style>
-</style>
