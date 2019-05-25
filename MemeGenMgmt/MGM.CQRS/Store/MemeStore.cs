@@ -2,10 +2,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MGM.CQRS.Interface;
 
 namespace MGM.CQRS.Store
 {
-    public class MemeStore : IDbMgmStoreCrud<Meme>
+    public class MemeStore : IMeme
     {
         public bool Delete(Meme model, int id = -1)
         {
@@ -41,6 +42,17 @@ namespace MGM.CQRS.Store
         {
             using (var context = new MGMContext())
                 return context.Meme.ToList();
+        }
+
+        public IEnumerable<Meme> SelectByUser(int userId)
+        {
+            using (var context = new MGMContext())
+            {
+                var list = context.Meme.Where(x => x.UserId == userId).ToList();
+                if (list.Count > 1)
+                    return list;
+            }
+            return new List<Meme>();
         }
 
         public Meme SelectById(int id)

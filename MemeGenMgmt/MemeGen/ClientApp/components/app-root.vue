@@ -1,28 +1,30 @@
 <template>
-  <v-app id="inspire" :dark="darkmode">
-    <app-navigation></app-navigation>
-    <app-search></app-search>
-    <v-layout align-center>
-      <v-flex lg3>
-        <v-btn @click="darkmode = !darkmode">Activate Dark mode</v-btn>
-      </v-flex>
-    </v-layout>
+  <v-app id="inspire">
+    <app-navigation @navChanged="navigationChanged" :nav="nav"></app-navigation>
+    <v-content>
+        <router-view></router-view>
+    </v-content>
   </v-app>
 </template>
 
 <script>
-import appSearch from "./appSearch";
-import appNavigation from "./appNavigation";
+import appSampleDisplay from "./appSampleDisplay";
+import appNavigation from "./nav/appNavigation";
 
 export default {
   data() {
     return {
-      darkmode: false
+      nav: false
     };
   },
   components: {
-    appSearch,
+    appSampleDisplay,
     appNavigation
+  },
+  methods: {
+    navigationChanged(event) {
+      this.nav = event;
+    }
   }
 };
 </script>
