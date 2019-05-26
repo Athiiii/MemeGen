@@ -28,7 +28,7 @@ namespace MGM.CQRS.Models
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder
-                    .UseMySql("server=104.207.133.76;database=mgm;user=monty;pwd=Bensey90;");
+                    .UseMySql("server=104.207.133.76;database=mgm;user=monty;pwd=Bensey90;Convert Zero Datetime=True;");
                     //.UseMySql("server=localhost;database=MGM;user=root;pwd=1234;");
             }
         }

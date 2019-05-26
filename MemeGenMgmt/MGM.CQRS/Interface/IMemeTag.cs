@@ -11,6 +11,6 @@ namespace MGM.CQRS.Interface
         void Insert(Memetag model);
         IEnumerable<Memetag> Select();
         IEnumerable<Memetag> SelectById(int tagId, int valueId);
-        bool Update(Memetag model, int id = -1);
+        bool Update(Memetag model);
     }
 }

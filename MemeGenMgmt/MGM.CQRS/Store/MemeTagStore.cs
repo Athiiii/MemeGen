@@ -65,7 +65,7 @@ namespace MGM.CQRS.Store
             }
         }
 
-        public bool Update(Memetag model, int id = -1)
+        public bool Update(Memetag model)
         {
             using (var context = new MGMContext())
             {

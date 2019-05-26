@@ -7,7 +7,7 @@ namespace MGM.CQRS.Store
 {
     internal class TemplateTagStore : ITemplateTag
     {
-        public bool Delete(Templatetag model, int tagId, int modelId)
+        public bool Delete(Templatetag model, int tagId = 1, int modelId = -1)
         {
             using (var context = new MGMContext())
             {

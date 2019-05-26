@@ -7,7 +7,7 @@ namespace MGM.CQRS.Interface
 {
     public interface ITemplateTag
     {
-        bool Delete(Templatetag model, int tagId, int modelId);
+        bool Delete(Templatetag model, int tagId = -1, int modelId = -1);
         void Insert(Templatetag model);
         IEnumerable<Templatetag> Select();
         IEnumerable<Templatetag> SelectById(int tagId, int valueId);

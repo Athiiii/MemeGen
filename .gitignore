@@ -347,3 +347,4 @@ MigrationBackup/
 **/logs/debug/*.json
 **/logs/info/*.json
 **/logs/error/*.json
+MemeGenMgmt/MemeGen/internalLog.txt
