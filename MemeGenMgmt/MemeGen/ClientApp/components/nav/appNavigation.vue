@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar app flat>
+    <v-toolbar app flat wrap>
       <v-toolbar-side-icon @click="nav = !nav"/>
       <router-link to="/" tag="v-toolbar-title">
         <v-toolbar-title class="display-2 font-weight-light">Meme Creator</v-toolbar-title>
@@ -9,16 +9,16 @@
       <v-toolbar-items>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-btn flat color="blue" v-on="on" large>
+            <v-btn flat color="blue" v-on="on" to="/create" large>
               <v-icon left large>create</v-icon>
-              <span>Create Meme</span>
+              <span class="hidden-xs-only">Create Meme</span>
             </v-btn>
           </template>
           <span>Create your custom Meme</span>
         </v-tooltip>
-        <v-btn flat large>
+        <v-btn to="/login" flat large>
           <v-icon left large>account_circle</v-icon>
-          <span>Login</span>
+          <span class="hidden-xs-only">Login</span>
         </v-btn>
       </v-toolbar-items>
     </v-toolbar>

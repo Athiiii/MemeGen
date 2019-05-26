@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 
 Vue.use(Vuex)
 
 // TYPES
-const MAIN_SET_COUNTER = 'MAIN_SET_COUNTER'
+const MAIN_SET_COUNTER = 'MAIN_SET_COUNTER';
 
 export default new Vuex.Store({
   state: {
