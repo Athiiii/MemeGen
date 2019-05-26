@@ -1,11 +1,11 @@
 ﻿using MGM.CQRS.Models;
 using System.Collections.Generic;
 using System.Linq;
-using MGM.CQRS.Interface;
 
 namespace MGM.CQRS.Store
 {
-    internal class TemplateStore : ITemplate
+    public class TemplateStore
+        : IDbMgmStoreCrud<Template>
     {
         public bool Delete(Template model, int id = -1)
         {

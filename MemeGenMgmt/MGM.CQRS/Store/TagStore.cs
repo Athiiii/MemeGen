@@ -1,11 +1,11 @@
 ﻿using MGM.CQRS.Models;
 using System.Collections.Generic;
 using System.Linq;
-using MGM.CQRS.Interface;
 
 namespace MGM.CQRS.Store
 {
-    internal class TagStore : ITag
+    public class TagStore
+        : IDbMgmStoreCrud<Tag>
     {
         public bool Delete(Tag model, int id = -1)
         {

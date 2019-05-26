@@ -1,11 +1,11 @@
 ﻿using MGM.CQRS.Models;
 using System.Collections.Generic;
 using System.Linq;
-using MGM.CQRS.Interface;
 
 namespace MGM.CQRS.Store
 {
-    internal class MemeTagStore : IMemeTag
+    public class MemeTagStore
+        : IDbMgmStoreTagCrud<Memetag>
     {
         public bool Delete(Memetag model, int tagId = -1, int modelId = -1)
         {
@@ -65,7 +65,7 @@ namespace MGM.CQRS.Store
             }
         }
 
-        public bool Update(Memetag model)
+        public bool Update(Memetag model, int id = -1)
         {
             using (var context = new MGMContext())
             {
