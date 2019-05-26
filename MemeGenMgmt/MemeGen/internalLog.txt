@@ -406,3 +406,11 @@
 2019-05-25 22:07:45.0878 Info Adding target FileTarget(Name=otherFile-web)
 2019-05-25 22:07:45.1223 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
 2019-05-25 22:07:45.1780 Info Found 68 configuration items
+2019-05-26 11:19:40.0416 Info Message Template Auto Format enabled
+2019-05-26 11:19:40.3440 Info Loading assembly: NLog.Web.AspNetCore
+2019-05-26 11:19:40.8441 Info Adding target FileTarget(Name=infoData)
+2019-05-26 11:19:40.8522 Info Adding target FileTarget(Name=debugData)
+2019-05-26 11:19:40.9086 Info Adding target FileTarget(Name=errorData)
+2019-05-26 11:19:40.9868 Info Adding target FileTarget(Name=otherFile-web)
+2019-05-26 11:19:41.0263 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: otherFile-web
+2019-05-26 11:19:41.1194 Info Found 68 configuration items

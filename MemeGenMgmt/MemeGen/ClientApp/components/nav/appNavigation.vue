@@ -2,13 +2,20 @@
   <div>
     <v-toolbar app flat>
       <v-toolbar-side-icon @click="nav = !nav"/>
-      <v-toolbar-title class="display-2 font-weight-light">Meme Creator</v-toolbar-title>
+      <router-link to="/" tag="v-toolbar-title">
+        <v-toolbar-title class="display-2 font-weight-light">Meme Creator</v-toolbar-title>
+      </router-link>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn flat color="blue" large>
-          <v-icon left large>create</v-icon>
-          <span>Create Meme</span>
-        </v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <v-btn flat color="blue" v-on="on" large>
+              <v-icon left large>create</v-icon>
+              <span>Create Meme</span>
+            </v-btn>
+          </template>
+          <span>Create your custom Meme</span>
+        </v-tooltip>
         <v-btn flat large>
           <v-icon left large>account_circle</v-icon>
           <span>Login</span>
@@ -17,7 +24,7 @@
     </v-toolbar>
     <v-navigation-drawer app v-model="nav">
       <v-list>
-        <v-list-tile v-for="link in links" :key="link.text" router :to="link.route">
+        <v-list-tile v-for="link in topLinks" :key="link.text" router :to="link.route">
           <v-list-tile-action>
             <v-icon>{{link.icon}}</v-icon>
           </v-list-tile-action>
@@ -32,10 +39,11 @@
 export default {
   data() {
     return {
-      links: [
-        { icon: "home", text: "Home", route: "/"},
-        { icon: "folder", text: "Profile", route: "/profile" },
-        { icon: "exit_to_app", text: "Logout", route: "/logout" }
+      topLinks: [
+        { icon: "home", text: "Home", route: "/" },
+        { icon: "account_box", text: "Profile", route: "/profile" },
+        { icon: "exit_to_app", text: "Logout", route: "/logout" },
+        { icon: "code", text: "API", route: "/developer/api" }
       ],
       nav: false
     };
