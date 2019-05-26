@@ -1,11 +1,11 @@
 ﻿using MGM.CQRS.Models;
 using System.Collections.Generic;
 using System.Linq;
+using MGM.CQRS.Interface;
 
 namespace MGM.CQRS.Store
 {
-    public class UserStore
-        : IDbMgmStoreCrud<User>
+    internal class UserStore : IUser
     {
         public bool Delete(User model, int id = -1)
         {
