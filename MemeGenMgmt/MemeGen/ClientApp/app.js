@@ -1,12 +1,12 @@
-import Vue from 'vue'
-import axios from 'axios'
-import router from './router/index'
-import store from './store'
-import { sync } from 'vuex-router-sync'
-import App from 'components/app-root'
-import { FontAwesomeIcon } from './icons'
-import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
+import Vue from 'vue';
+import axios from 'axios';
+import router from './router/index';
+import store from './store';
+import { sync } from 'vuex-router-sync';
+import App from 'components/app-root';
+import { FontAwesomeIcon } from './icons';
+import Vuetify from 'vuetify';
+import 'vuetify/dist/vuetify.min.css';
 
 // Register Vuetify Components
 Vue.use(Vuetify)
@@ -21,11 +21,20 @@ sync(store, router)
 const app = new Vue({
   store,
   router,
-  ...App
+  ...App,
+  beforeCreate () {
+    // get data from localstorage
+    this.$store.commit('initialiseStore')
+  }
 })
 
-export {
-  app,
-  router,
-  store
-}
+// Subscribe to store updates
+store.subscribe((mutation, state) => {
+  let store = {
+    darkmode: state.darkmode
+  }
+  // Store the store object as a JSON string
+  localStorage.setItem('store', JSON.stringify(store))
+})
+
+export { app, router, store }

@@ -30,12 +30,30 @@
           </v-list-tile-action>
           <v-list-tile-title>{{link.text}}</v-list-tile-title>
         </v-list-tile>
+        <v-list-tile>
+          <v-list-tile-action>
+            <v-list-tile-title>
+              <v-layout row justify-space-between wrap>
+                <v-flex>
+                  <v-switch v-model="darkmode" slot="default">
+                    <template v-slot:label>Darkmode</template>
+                  </v-switch>
+                </v-flex>
+                <v-flex>
+                  <v-chip color="orange" text-color="white" class="mt-0 ml-3" small>Beta</v-chip>
+                </v-flex>
+              </v-layout>
+            </v-list-tile-title>
+          </v-list-tile-action>
+        </v-list-tile>
       </v-list>
     </v-navigation-drawer>
   </div>
 </template>
 
 <script>
+import store from "../../store/index";
+
 export default {
   data() {
     return {
@@ -47,6 +65,16 @@ export default {
       ],
       nav: false
     };
+  },
+  computed: {
+    darkmode: {
+      get() {
+        return store.state.darkmode;
+      },
+      set() {
+        store.commit("switchDarkmode");
+      }
+    }
   }
 };
 </script>
