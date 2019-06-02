@@ -1,5 +1,6 @@
 ﻿using MGM.CQRS.Models;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using MGM.CQRS.Interface;
 
@@ -64,6 +65,24 @@ namespace MGM.CQRS.Store
                 context.SaveChanges();
 
                 return true;
+            }
+        }
+
+        public bool UserExists(string username)
+        {
+            using (var context = new MGMContext())
+            {
+                var user = context.User.FirstOrDefault(x => x.Username == username);
+                return user != null;
+            }
+        }
+
+        public bool MailExists(string mail)
+        {
+            using (var context = new MGMContext())
+            {
+                var mailObj = context.User.FirstOrDefault(x => x.Mail == mail);
+                return mailObj != null;
             }
         }
     }

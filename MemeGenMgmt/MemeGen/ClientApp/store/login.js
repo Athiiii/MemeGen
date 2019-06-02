@@ -11,19 +11,28 @@ const state = {
   usernameRule: [
     value => {
       if (value.length === 0) return 'username is empty';
+      else return true
     }
   ],
   passwordRule: [
     value => {
       if (value.length === 0) return 'password is empty';
-      else if (value.length < 9) return 'password length must be more than 8';
+      else if (value.length < 8) return 'password length must be more than 8';
       else if (/(?=.*\d)(?=.*[a-zA-Z])/.test(value)) return true
       else return 'password must contain letters and numbers';
     }
   ],
-  agbRule: [value => !!value || 'You must agree to continue!']
+  agbRule: [value => !!value || 'You must agree to continue!'],
+  mail: ''
+}
+
+const mutations = {
+  setMail (states, mail) {
+    states.mail = mail
+  }
 }
 
 export default {
-  state
+  state,
+  mutations
 }

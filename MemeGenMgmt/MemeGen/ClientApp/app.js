@@ -30,8 +30,10 @@ const app = new Vue({
 
 // Subscribe to store updates
 store.subscribe((mutation, state) => {
+  console.log('subscribe')
   let store = {
-    darkmode: state.darkmode
+    darkmode: state.darkmode,
+    mail: state.login.mail
   }
   // Store the store object as a JSON string
   localStorage.setItem('store', JSON.stringify(store))

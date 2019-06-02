@@ -26,6 +26,19 @@ namespace MemeGen.Controllers
             return _userService.Select();
         }
 
+        [HttpGet("exists")]
+        public string[] GetUserByUsernameAndMail(string username, string mail)
+        {
+            var userExists = _userService.UserExists(username);
+            var mailExists = _userService.MailExists(mail);
+            var invalidCredentials = new List<string>();
+            if (userExists)
+                invalidCredentials.Add("user");
+            if (mailExists)
+                invalidCredentials.Add("mail");
+            return invalidCredentials.ToArray();
+        }
+
         [HttpGet("{id}")]
         public User GetUserByUser(int id)
         {

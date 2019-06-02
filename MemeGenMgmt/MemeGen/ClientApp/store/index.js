@@ -9,7 +9,7 @@ const MAIN_SET_COUNTER = 'MAIN_SET_COUNTER';
 export default new Vuex.Store({
   state: {
     counter: 0,
-    darkmode: true
+    darkmode: false
   },
   getters: {
     doubleCounter: state => {
@@ -21,6 +21,7 @@ export default new Vuex.Store({
       state.counter = obj.counter
     },
     initialiseStore (state) {
+      debugger
       if (localStorage.getItem('store')) {
         this.replaceState(
           Object.assign(state, JSON.parse(localStorage.getItem('store')))

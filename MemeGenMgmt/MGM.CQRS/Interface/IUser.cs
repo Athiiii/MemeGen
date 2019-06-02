@@ -12,5 +12,7 @@ namespace MGM.CQRS.Interface
         IEnumerable<User> Select();
         User SelectById(int id);
         bool Update(User model, int id = -1);
+        bool UserExists(string username);
+        bool MailExists(string mail);
     }
 }

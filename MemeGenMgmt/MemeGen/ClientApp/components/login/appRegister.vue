@@ -19,6 +19,8 @@
               prepend-icon="email"
               hint="We won't spam you"
               :rules="mailRule"
+              @input="mailError = ''"
+              :error-messages="mailError"
             ></v-text-field>
             <v-text-field
               label="username"
@@ -26,6 +28,8 @@
               v-model="username"
               prepend-icon="perm_identity"
               :rules="usernameRule"
+              :error-messages="usernameError"
+              @input="usernameError = ''"
             ></v-text-field>
             <v-text-field
               label="password"
@@ -48,7 +52,7 @@
                 <app-modal :dialog="modal.dialog" :content="modal.content" :title="modal.title"></app-modal>
               </label>
             </v-checkbox>
-            <v-btn color="info" @click="submit">Register</v-btn>
+            <v-btn :color="btn.color" @click="btn.event" :loading="btn.load">{{btn.label}}</v-btn>
           </v-card-text>
         </v-card>
       </v-form>
@@ -59,6 +63,10 @@
 <script>
 import appModal from "../appModal";
 import store from "../../store";
+import { debuglog } from "util";
+import axios from "axios";
+import { all } from "q";
+import { setTimeout } from 'timers';
 
 export default {
   data() {
@@ -76,7 +84,15 @@ export default {
       mailRule: store.state.login.mailRule,
       usernameRule: store.state.login.usernameRule,
       passwordRule: store.state.login.passwordRule,
-      agbRule: store.state.login.agbRule
+      agbRule: store.state.login.agbRule,
+      usernameError: "",
+      mailError: "",
+      btn: {
+        load: false,
+        label: "Register",
+        color: "info",
+        event: this.submit
+      }
     };
   },
   methods: {
@@ -87,7 +103,60 @@ export default {
       this.modal.dialog = true;
     },
     submit() {
-      var i = this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        this.btn.load = true;
+        axios
+          .get("/api/User/exists/", {
+            params: {
+              username: this.username,
+              mail: this.mail
+            }
+          })
+          .then(response => {
+            var allOk = true;
+            if (response.data.includes("user")) {
+              this.password = "";
+              this.username = "";
+              this.usernameError = "This username is already given";
+              allOk = false;
+              this.btn.load = false;
+            }
+            if (response.data.includes("mail")) {
+              this.password = "";
+              this.mail = "";
+              this.mailError = "This mail is already in use";
+              allOk = false;
+              this.btn.load = false;
+            }
+            if (allOk) {
+              axios
+                .post("/api/User/", {
+                  Username: this.username,
+                  Mail: this.mail,
+                  Password: this.password
+                })
+                .then(response => {
+                  this.btn.load = false;
+                  this.btn.color = "success";
+                  this.btn.label = "Successful";
+                  this.btn.event = this.placeholder;
+                  store.commit("setMail", this.mail);
+                  setTimeout(() => {
+                  this.$router.push("login");
+                  }, 1000)
+                })
+                .catch(error => {
+                  this.btn.load = false;
+                });
+            }
+          })
+          .catch(error => {
+            this.btn.load = false;
+          });
+      }
+    },
+    placeholder() {
+      //THIS WILL DO NOTHING
     }
   },
   components: {

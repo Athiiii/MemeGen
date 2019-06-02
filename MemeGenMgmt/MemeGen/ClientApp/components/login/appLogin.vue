@@ -12,7 +12,7 @@
         </v-layout>
         <v-card-text>
           <v-text-field
-            label="username or password"
+            label="username or email"
             color="#0bafff"
             v-model="username"
             prepend-icon="perm_identity"
@@ -43,7 +43,7 @@
 export default {
   data() {
     return {
-      username: "",
+      username: this.$store.state.mail,
       password: "",
       showPwd: false
     };
