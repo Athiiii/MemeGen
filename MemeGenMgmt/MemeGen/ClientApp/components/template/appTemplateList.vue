@@ -1,0 +1,82 @@
+<template>
+  <div>
+    <v-layout row wrap justify-center v-scroll="onScroll">
+      <v-flex xs12 sm6 md4 lg2 v-for="img in displayData" :key="img.id" class="ma-3">
+        <v-card v-ripple flat>
+          <v-img :src="img.imagePath" :lazy-src="img.lazy" aspect-ratio="1" class="grey lighten-2">
+            <template v-slot:placeholder>
+              <v-layout fill-height align-center justify-center ma-0>
+                <v-progress-circular indeterminate color="secondary" :size="60" width="6"></v-progress-circular>
+              </v-layout>
+            </template>
+          </v-img>
+          <v-card-title primary-title>
+            <h3 class="headline mb-0">{{ img.name }}</h3>
+          </v-card-title>
+        </v-card>
+      </v-flex>
+      <v-flex justify-center xs12 sm12 md12 lg12 class="text-xs-center my-2">
+        <v-progress-circular :size="70" color="primary" indeterminate v-show="loading" :width="6"></v-progress-circular>
+      </v-flex>
+    </v-layout>
+  </div>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      data: [],
+      displayData: [],
+      loadHeight: 0,
+      loading: false
+    };
+  },
+  methods: {
+    onScroll(e) {
+      var scroll = e.target.scrollingElement;
+
+      if (
+        scroll.offsetHeight - 50 <=
+        scroll.scrollTop + e.path[1].innerHeight
+      ) {
+        this.loadMoreImg(100);
+      }
+    },
+    loadMoreImg(count) {
+      this.loading = true;
+      if (this.data !== null && this.data.length > count) {
+        this.data.slice(0, count).forEach(element => {
+          this.displayData.push(element);
+        });
+        this.data.splice(0, count);
+        var i = this.displayData;
+      } else if (this.data !== null && this.data.length > 0) {
+        this.data.forEach(element => {
+          this.displayData.push(element);
+        });
+        this.data = null;
+        this.loading = false;
+      }
+    }
+  },
+  mounted() {
+    this.loading = true;
+    axios.get("/api/template").then(response => {
+      axios.get("lazyLoad.json").then(lazyData => {
+        response.data.forEach(element => {
+          var data = lazyData.data.find(pair => {
+            return pair.Name === `${element.name}.jpg`;
+          });
+          element["lazy"] = data.Data;
+        });
+        this.data = response.data;
+        this.loadMoreImg(20);
+      });
+    });
+  }
+};
+</script>
+

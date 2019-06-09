@@ -66,7 +66,7 @@ import store from "../../store";
 import { debuglog } from "util";
 import axios from "axios";
 import { all } from "q";
-import { setTimeout } from 'timers';
+import { setTimeout } from "timers";
 
 export default {
   data() {
@@ -142,8 +142,8 @@ export default {
                   this.btn.event = this.placeholder;
                   store.commit("setMail", this.mail);
                   setTimeout(() => {
-                  this.$router.push("login");
-                  }, 1000)
+                    this.$router.push("login");
+                  }, 1000);
                 })
                 .catch(error => {
                   this.btn.load = false;

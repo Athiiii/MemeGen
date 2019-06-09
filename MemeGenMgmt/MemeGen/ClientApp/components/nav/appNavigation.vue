@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-toolbar app flat wrap>
+    <v-toolbar app flat wrap scrollOffScreen>
       <v-toolbar-side-icon @click="nav = !nav"/>
       <router-link to="/" tag="v-toolbar-title">
         <v-toolbar-title class="display-2 font-weight-light">Meme Creator</v-toolbar-title>

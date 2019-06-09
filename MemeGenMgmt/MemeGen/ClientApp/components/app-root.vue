@@ -17,7 +17,8 @@ import store from "../store/index";
 export default {
   data() {
     return {
-      nav: false
+      nav: false,
+      loadHeight: 0
     };
   },
   components: {

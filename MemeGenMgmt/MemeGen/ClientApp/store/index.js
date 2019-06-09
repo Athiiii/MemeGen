@@ -21,7 +21,6 @@ export default new Vuex.Store({
       state.counter = obj.counter
     },
     initialiseStore (state) {
-      debugger
       if (localStorage.getItem('store')) {
         this.replaceState(
           Object.assign(state, JSON.parse(localStorage.getItem('store')))
