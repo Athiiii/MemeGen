@@ -5,9 +5,9 @@ import appApi from '../components/api/appApi';
 import appProfile from '../components/profile/appProfile';
 import appRegister from '../components/login/appRegister';
 import appLogin from '../components/login/appLogin';
-import appMemeCreator from '../components/creator/appMemeCreator';
 import appPrivacyPolicy from '../components/agb/appPrivacyPolicy';
 import appTermsOfUse from '../components/agb/appTermsOfUse';
+import appCreateMeme from '../components/create/appCreateMeme';
 
 Vue.use(Router)
 
@@ -30,10 +30,6 @@ export default new Router({
       component: appRegister
     },
     {
-      path: '/create',
-      component: appMemeCreator
-    },
-    {
       path: '/login',
       component: appLogin
     },
@@ -44,6 +40,10 @@ export default new Router({
     {
       path: '/terms',
       component: appTermsOfUse
+    },
+    {
+      path: '/memeCreate',
+      component: appCreateMeme
     }
   ],
   mode: 'history'

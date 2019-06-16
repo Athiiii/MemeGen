@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using MGM.CQRS.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace MGM.CQRS.Store
 {
@@ -40,7 +41,19 @@ namespace MGM.CQRS.Store
         public IEnumerable<Template> Select()
         {
             using (var context = new MGMContext())
-                return context.Template.ToList();
+                return context.Template
+                    .Include(x => x.Meme)
+                    .Include(x => x.Templatetag)
+                    .Select(x => new Template
+                    {
+                        Id = x.Id,
+                        ImagePath = x.ImagePath,
+                        Name = x.Name,
+                        Meme = x.Meme.Select(meme => new Meme { Id = meme.Id }).ToList(),
+                        Templatetag = x.Templatetag.Select(template => new Templatetag
+                            { Tag = new Tag { Description = template.Tag.Description }}).ToList()
+                    })
+                    .ToList();
         }
 
         public Template SelectById(int id)

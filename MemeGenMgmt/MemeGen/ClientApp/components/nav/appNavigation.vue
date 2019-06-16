@@ -9,7 +9,7 @@
       <v-toolbar-items>
         <v-tooltip bottom>
           <template v-slot:activator="{ on }">
-            <v-btn flat color="blue" v-on="on" to="/create" large>
+            <v-btn flat color="blue" v-on="on" to="/memeCreate" large>
               <v-icon left large>create</v-icon>
               <span class="hidden-xs-only">Create Meme</span>
             </v-btn>

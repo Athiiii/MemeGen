@@ -16,6 +16,7 @@
             color="#0bafff"
             v-model="username"
             prepend-icon="perm_identity"
+            browser-autocomplete
           ></v-text-field>
           <v-text-field
             label="password"

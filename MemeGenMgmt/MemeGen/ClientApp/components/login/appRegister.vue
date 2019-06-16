@@ -21,6 +21,7 @@
               :rules="mailRule"
               @input="mailError = ''"
               :error-messages="mailError"
+              browser-autocomplete
             ></v-text-field>
             <v-text-field
               label="username"

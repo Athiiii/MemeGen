@@ -10,7 +10,8 @@
 </template>
 
 <script>
-import appSampleDisplay from "./appSampleDisplay";
+import appCreateMeme from "./create/appCreateMeme";
+import appTemplateList from "./template/appTemplateList";
 import appNavigation from "./nav/appNavigation";
 import store from "../store/index";
 
@@ -22,7 +23,8 @@ export default {
     };
   },
   components: {
-    appSampleDisplay,
+    appCreateMeme,
+    appTemplateList,
     appNavigation
   },
   methods: {
