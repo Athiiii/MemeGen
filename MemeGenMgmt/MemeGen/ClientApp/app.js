@@ -7,10 +7,12 @@ import App from 'components/app-root';
 import { FontAwesomeIcon } from './icons';
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
-
+import Konva from 'vue-konva';
 // Register Vuetify Components
 Vue.use(Vuetify)
 
+// Register Konva
+Vue.use(Konva)
 // Registration of global components
 Vue.component('icon', FontAwesomeIcon)
 
